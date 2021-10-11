@@ -14296,9 +14296,9 @@ a.anchor-link {
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Requirement already satisfied: imblearn in c:\users\hp-family desktop\anaconda3\lib\site-packages (0.0)
 Requirement already satisfied: imbalanced-learn in c:\users\hp-family desktop\anaconda3\lib\site-packages (from imblearn) (0.8.1)
-Requirement already satisfied: numpy&gt;=1.13.3 in c:\users\hp-family desktop\appdata\roaming\python\python38\site-packages (from imbalanced-learn-&gt;imblearn) (1.21.2)
-Requirement already satisfied: scikit-learn&gt;=0.24 in c:\users\hp-family desktop\anaconda3\lib\site-packages (from imbalanced-learn-&gt;imblearn) (0.24.1)
 Requirement already satisfied: joblib&gt;=0.11 in c:\users\hp-family desktop\anaconda3\lib\site-packages (from imbalanced-learn-&gt;imblearn) (1.0.1)
+Requirement already satisfied: scikit-learn&gt;=0.24 in c:\users\hp-family desktop\anaconda3\lib\site-packages (from imbalanced-learn-&gt;imblearn) (0.24.1)
+Requirement already satisfied: numpy&gt;=1.13.3 in c:\users\hp-family desktop\appdata\roaming\python\python38\site-packages (from imbalanced-learn-&gt;imblearn) (1.21.2)
 Requirement already satisfied: scipy&gt;=0.19.1 in c:\users\hp-family desktop\anaconda3\lib\site-packages (from imbalanced-learn-&gt;imblearn) (1.6.2)
 Requirement already satisfied: threadpoolctl&gt;=2.0.0 in c:\users\hp-family desktop\anaconda3\lib\site-packages (from scikit-learn&gt;=0.24-&gt;imbalanced-learn-&gt;imblearn) (2.1.0)
 </pre>
@@ -14753,7 +14753,7 @@ memory usage: 30.5+ KB
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># train/validation set excluding test_set</span>
@@ -15012,6 +15012,174 @@ Confusion matrix
 Confusion matrix
 [[147  49]
  [ 17  17]]
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### KNN with balanced data - replaced &#39;Wdirection&#39; with &#39;on_offshore&#39; plus removed &#39;Rain48&#39; and &#39;RainWA&#39;-Channing&#39;s KNN code</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;KNN (n=9) model with ADASYN (minority) balanced data - add &#39;on_offshore&#39; plus removed &#39;Rain48&#39; and &#39;RainWA&#39;&quot;</span><span class="p">)</span>
+<span class="n">input_data</span> <span class="o">=</span> <span class="n">data_frame</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">2</span><span class="p">:</span><span class="mi">9</span><span class="p">]</span>
+<span class="n">input_data</span><span class="p">[</span><span class="s1">&#39;on_offshore&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_frame</span><span class="p">[</span><span class="s1">&#39;on_offshore&#39;</span><span class="p">]</span>
+<span class="n">input_data</span> <span class="o">=</span> <span class="n">input_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Rain48&#39;</span><span class="p">,</span> <span class="s1">&#39;RainWA&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;input data -&quot;</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">input_data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">entero_data</span> <span class="o">=</span> <span class="n">data_frame</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">12</span><span class="p">]</span>
+
+<span class="c1"># For loop</span>
+<span class="n">j</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="c1"># Split the train set and the test set</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">entero_data</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+    <span class="c1"># Fit the scaler to X_train, and then use it to transform both the train set and the test set</span>
+    <span class="n">transfromer</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">Normalizer</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="n">X_train</span> <span class="o">=</span> <span class="n">transfromer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="c1">#X_test = transfromer.transform(X_test)</span>
+
+    <span class="c1"># Oversample the train set with ADASYN</span>
+    <span class="n">ada</span> <span class="o">=</span> <span class="n">ADASYN</span><span class="p">(</span><span class="n">sampling_strategy</span><span class="o">=</span><span class="s2">&quot;minority&quot;</span><span class="p">)</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">ada</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+  
+    <span class="c1"># Run KNN with sklearn</span>
+    <span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+    <span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">j</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+    <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+
+<span class="c1">#End of loop</span>
+
+<span class="c1"># Show the KNN result</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Predictions from the knn classifier:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Target values:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Overall accuracy:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Confusion matrix&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>KNN (n=9) model with ADASYN (minority) balanced data - add &#39;on_offshore&#39; plus removed &#39;Rain48&#39; and &#39;RainWA&#39;
+input data - [&#39;Rain24&#39; &#39;Rain72&#39; &#39;Wdirection&#39; &#39;Wspeed&#39; &#39;Solarhours&#39; &#39;on_offshore&#39;]
+Predictions from the knn classifier:
+[0 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0
+ 0 0 1 0 1 1 0 0 0 0 0 0 1 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
+ 0 0 0 0 1 0 0 0 0 0 0]
+Target values:
+1057    1
+168     1
+1053    0
+1908    0
+1070    0
+       ..
+1128    0
+618     0
+169     0
+658     0
+1109    0
+Name: Entero_level, Length: 122, dtype: int64
+Overall accuracy:
+0.7972950819672131
+Confusion matrix
+[[97 17]
+ [ 7  1]]
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+
+
+<div class="jp-RenderedImage jp-OutputArea-output ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Final model test on separate test-set</span>
+<span class="n">data_set</span> <span class="o">=</span> <span class="n">test_set</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">2</span><span class="p">:</span><span class="mi">9</span><span class="p">]</span>
+<span class="n">data_set</span><span class="p">[[</span><span class="s1">&#39;on_offshore&#39;</span><span class="p">,</span><span class="s1">&#39;Entero_level&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">test_set</span><span class="p">[[</span><span class="s1">&#39;on_offshore&#39;</span><span class="p">,</span><span class="s1">&#39;Entero_level&#39;</span><span class="p">]]</span>
+<span class="n">data_set</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Rain48&#39;</span><span class="p">,</span> <span class="s1">&#39;RainWA&#39;</span><span class="p">])</span>
+<span class="n">test_set_data</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">transformer</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">Normalizer</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">test_set_data</span><span class="p">)</span>
+<span class="n">test_set_data</span> <span class="o">=</span> <span class="n">transformer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">test_set_data</span><span class="p">)</span>
+<span class="n">test_set_labels</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">6</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Overall accuracy:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">test_set_labels</span><span class="p">,</span><span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_set_data</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Confusion matrix&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_set_labels</span><span class="p">,</span><span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_set_data</span><span class="p">)))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Overall accuracy:
+0.6260869565217392
+Confusion matrix
+[[124  72]
+ [ 14  20]]
 </pre>
 </div>
 </div>
