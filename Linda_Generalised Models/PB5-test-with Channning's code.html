@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PB5-experiment-with Channning's code</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>PB5-test-with Channning's code</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -14259,7 +14259,7 @@ a.anchor-link {
 <div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[67]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Setup</span>
@@ -14292,7 +14292,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[68]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Import recategorised data</span>
@@ -14313,7 +14313,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[68]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2]:</div>
 
 
 
@@ -14503,7 +14503,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[69]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">wholedata</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -14522,7 +14522,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[69]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
 
 
 
@@ -14673,12 +14673,12 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[70]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">wholedata</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">wholedata</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;datetime64&#39;</span><span class="p">)</span>
 <span class="c1"># put aside test_set for final test</span>
-<span class="n">test_set</span> <span class="o">=</span> <span class="n">wholedata</span><span class="p">[</span><span class="n">wholedata</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="o">&gt;=</span><span class="mi">2016</span><span class="p">]</span>
+<span class="n">test_set</span> <span class="o">=</span> <span class="n">wholedata</span><span class="p">[</span><span class="n">wholedata</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="o">&gt;=</span><span class="mi">2017</span><span class="p">]</span>
 <span class="n">test_set</span> <span class="o">=</span> <span class="n">test_set</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;Entero&quot;</span><span class="p">,</span> <span class="s2">&quot;RainWA&quot;</span><span class="p">,</span> <span class="s2">&quot;BeachName&quot;</span><span class="p">,</span> <span class="s2">&quot;Wspeed&quot;</span><span class="p">,</span> <span class="s2">&quot;Wdirection&quot;</span><span class="p">,</span> <span class="s2">&quot;BeachDirection&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">test_set</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">test_set</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;datetime64&#39;</span><span class="p">)</span>
 <span class="n">test_set</span> <span class="o">=</span> <span class="n">test_set</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">(</span><span class="nb">list</span><span class="p">([</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">test_set</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">c</span> <span class="o">!=</span> <span class="s2">&quot;Entero_level&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;Entero_level&quot;</span><span class="p">]))</span>
@@ -14703,22 +14703,22 @@ a.anchor-link {
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-Int64Index: 230 entries, 190 to 2016
+Int64Index: 105 entries, 215 to 2016
 Data columns (total 10 columns):
  #   Column            Non-Null Count  Dtype         
 ---  ------            --------------  -----         
- 0   DATE              230 non-null    datetime64[ns]
- 1   Rain24            230 non-null    float64       
- 2   Rain48            230 non-null    float64       
- 3   Rain72            230 non-null    float64       
- 4   Solarhours        230 non-null    float64       
- 5   BeachType         230 non-null    int64         
- 6   Wspeed_level      230 non-null    int64         
- 7   Wdirection_level  230 non-null    int64         
- 8   on_offshore       230 non-null    int64         
- 9   Entero_level      230 non-null    int64         
+ 0   DATE              105 non-null    datetime64[ns]
+ 1   Rain24            105 non-null    float64       
+ 2   Rain48            105 non-null    float64       
+ 3   Rain72            105 non-null    float64       
+ 4   Solarhours        105 non-null    float64       
+ 5   BeachType         105 non-null    int64         
+ 6   Wspeed_level      105 non-null    int64         
+ 7   Wdirection_level  105 non-null    int64         
+ 8   on_offshore       105 non-null    int64         
+ 9   Entero_level      105 non-null    int64         
 dtypes: datetime64[ns](1), float64(4), int64(5)
-memory usage: 19.8 KB
+memory usage: 9.0 KB
 </pre>
 </div>
 </div>
@@ -14730,12 +14730,12 @@ memory usage: 19.8 KB
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[71]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># train/validation set excluding test_set</span>
-<span class="n">data_frame</span> <span class="o">=</span> <span class="n">wholedata</span><span class="p">[</span><span class="n">wholedata</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="o">&lt;</span><span class="mi">2016</span><span class="p">]</span>
-<span class="n">data_frame</span> <span class="o">=</span> <span class="n">data_frame</span><span class="p">[</span><span class="n">data_frame</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="o">&gt;</span><span class="mi">1999</span><span class="p">]</span>
+<span class="n">data_frame</span> <span class="o">=</span> <span class="n">wholedata</span><span class="p">[</span><span class="n">wholedata</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="o">&lt;</span><span class="mi">2017</span><span class="p">]</span>
+<span class="n">data_frame</span> <span class="o">=</span> <span class="n">data_frame</span><span class="p">[</span><span class="n">data_frame</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="o">&gt;=</span><span class="mi">2000</span><span class="p">]</span>
 <span class="n">recategorised_data</span> <span class="o">=</span> <span class="n">data_frame</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">])</span>
 <span class="n">recategorised_data</span> <span class="o">=</span> <span class="n">recategorised_data</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;Entero&quot;</span><span class="p">,</span> <span class="s2">&quot;RainWA&quot;</span><span class="p">,</span> <span class="s2">&quot;BeachName&quot;</span><span class="p">,</span> <span class="s2">&quot;Wspeed&quot;</span><span class="p">,</span> <span class="s2">&quot;Wdirection&quot;</span><span class="p">,</span> <span class="s2">&quot;BeachDirection&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">recategorised_data</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">recategorised_data</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;datetime64&#39;</span><span class="p">)</span>
@@ -14761,22 +14761,22 @@ memory usage: 19.8 KB
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-Int64Index: 1418 entries, 803 to 1151
+Int64Index: 1543 entries, 803 to 1997
 Data columns (total 10 columns):
  #   Column            Non-Null Count  Dtype         
 ---  ------            --------------  -----         
- 0   DATE              1418 non-null   datetime64[ns]
- 1   Rain24            1418 non-null   float64       
- 2   Rain48            1418 non-null   float64       
- 3   Rain72            1418 non-null   float64       
- 4   Solarhours        1418 non-null   float64       
- 5   BeachType         1418 non-null   int64         
- 6   Wspeed_level      1418 non-null   int64         
- 7   Wdirection_level  1418 non-null   int64         
- 8   on_offshore       1418 non-null   int64         
- 9   Entero_level      1418 non-null   int64         
+ 0   DATE              1543 non-null   datetime64[ns]
+ 1   Rain24            1543 non-null   float64       
+ 2   Rain48            1543 non-null   float64       
+ 3   Rain72            1543 non-null   float64       
+ 4   Solarhours        1543 non-null   float64       
+ 5   BeachType         1543 non-null   int64         
+ 6   Wspeed_level      1543 non-null   int64         
+ 7   Wdirection_level  1543 non-null   int64         
+ 8   on_offshore       1543 non-null   int64         
+ 9   Entero_level      1543 non-null   int64         
 dtypes: datetime64[ns](1), float64(4), int64(5)
-memory usage: 121.9 KB
+memory usage: 132.6 KB
 </pre>
 </div>
 </div>
@@ -14788,7 +14788,7 @@ memory usage: 121.9 KB
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[72]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Set random state</span>
@@ -14816,7 +14816,7 @@ memory usage: 121.9 KB
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[76]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">rolling_cv</span><span class="p">(</span><span class="n">hyperparameters</span><span class="p">,</span> <span class="n">fit_model</span><span class="p">):</span>
@@ -14846,7 +14846,7 @@ memory usage: 121.9 KB
             <span class="n">X_valdn</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">transfromer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_valdn</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
 
             <span class="c1"># Oversample the train set with ADASYN</span>
-            <span class="n">adasyn</span> <span class="o">=</span> <span class="n">ADASYN</span><span class="p">(</span><span class="n">sampling_strategy</span><span class="o">=</span><span class="s2">&quot;minority&quot;</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+            <span class="n">adasyn</span> <span class="o">=</span> <span class="n">ADASYN</span><span class="p">(</span><span class="n">sampling_strategy</span><span class="o">=</span><span class="s2">&quot;minority&quot;</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
             <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">adasyn</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
             <span class="c1"># Test hyperparameters</span>
@@ -14856,9 +14856,9 @@ memory usage: 121.9 KB
                 <span class="n">knn</span> <span class="o">=</span> <span class="n">fit_model</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
                 <span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
-                <span class="c1"># Better safe than sorry, so the true negative rate is what we care the most</span>
+                <span class="c1"># Better safe than sorry, so the true negative rate is what we care the most - should be true positive rate</span>
                 <span class="n">tn</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">tp</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_valdn</span><span class="p">,</span> <span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_valdn</span><span class="p">))</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
-                <span class="n">cv</span><span class="p">[</span><span class="n">ts_idx</span><span class="p">,</span> <span class="n">kf_idx</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">tn</span><span class="o">/</span><span class="p">(</span><span class="n">tn</span><span class="o">+</span><span class="n">fp</span><span class="p">)</span>
+                <span class="n">cv</span><span class="p">[</span><span class="n">ts_idx</span><span class="p">,</span> <span class="n">kf_idx</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">tp</span><span class="o">/</span><span class="p">(</span><span class="n">tp</span><span class="o">+</span><span class="n">fn</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">l_test</span><span class="p">,</span> <span class="n">cv</span>
 </pre></div>
 
@@ -14870,7 +14870,7 @@ memory usage: 121.9 KB
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[77]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">walking_eval</span><span class="p">(</span><span class="n">l_test</span><span class="p">,</span> <span class="n">fitted_model</span><span class="p">):</span>
@@ -14887,7 +14887,7 @@ memory usage: 121.9 KB
         <span class="n">X_train</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">transfromer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
         <span class="n">X_test</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">transfromer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
 
-        <span class="n">adasyn</span> <span class="o">=</span> <span class="n">ADASYN</span><span class="p">(</span><span class="n">sampling_strategy</span><span class="o">=</span><span class="s2">&quot;minority&quot;</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+        <span class="n">adasyn</span> <span class="o">=</span> <span class="n">ADASYN</span><span class="p">(</span><span class="n">sampling_strategy</span><span class="o">=</span><span class="s2">&quot;minority&quot;</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">adasyn</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
         <span class="c1"># Plug in the best hyperparameter(s) from cv</span>
@@ -14895,7 +14895,7 @@ memory usage: 121.9 KB
         <span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
         <span class="n">tn</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">tp</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
-        <span class="n">r</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tn</span><span class="o">/</span><span class="p">(</span><span class="n">tn</span><span class="o">+</span><span class="n">fp</span><span class="p">))</span>
+        <span class="n">r</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tp</span><span class="o">/</span><span class="p">(</span><span class="n">tp</span><span class="o">+</span><span class="n">fn</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 </pre></div>
 
@@ -14907,7 +14907,7 @@ memory usage: 121.9 KB
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[78]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#KNN</span>
@@ -14926,7 +14926,7 @@ memory usage: 121.9 KB
 <span class="n">fitted_model</span> <span class="o">=</span> <span class="n">knn</span><span class="p">(</span><span class="n">best</span><span class="p">)</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">walking_eval</span><span class="p">(</span><span class="n">l_test</span><span class="p">,</span> <span class="n">fitted_model</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The best KNN is with an average specificity of </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">r</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The best KNN is with an average sensitivity of </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">r</span><span class="p">)))</span>
 </pre></div>
 
      </div>
@@ -14946,8 +14946,8 @@ memory usage: 121.9 KB
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>The best KNN is with 2 neighbour(s)
-The best KNN is with an average specificity of 0.8719082136220392
+<pre>The best KNN is with 9 neighbour(s)
+The best KNN is with an average sensitivity of 0.396903274729783
 </pre>
 </div>
 </div>
@@ -14959,7 +14959,7 @@ The best KNN is with an average specificity of 0.8719082136220392
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[79]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Final KNN model test on separate test-set</span>
@@ -14995,31 +14995,27 @@ The best KNN is with an average specificity of 0.8719082136220392
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Accuracy score
-0.7652173913043478
+0.6285714285714286
 Confusion matrix
-[[170  26]
- [ 28   6]]
+[[59 29]
+ [10  7]]
 Targets
-190     0
-191     0
-192     0
-193     0
-194     0
+215     0
+216     0
+217     0
+218     0
+219     0
        ..
 2012    0
 2013    0
 2014    0
 2015    0
 2016    0
-Name: Entero_level, Length: 230, dtype: int64
+Name: Entero_level, Length: 105, dtype: int64
 Predictions
-[0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0
- 0 1 0 0 1 0 0 0 0 0 0 0 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
- 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 0
- 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 1 1 0 0 0
- 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 1 1 1 0 0 1 1 0 0 0 1 1 0 0 0 0 0 0 0 0
- 1 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
- 0 1 0 0 0 1 0 0]
+[0 0 1 1 0 1 1 1 0 0 0 0 0 1 0 0 1 0 0 1 0 0 0 0 1 1 1 0 1 0 1 0 0 0 0 0 1
+ 0 0 0 0 0 1 0 0 1 0 0 0 0 0 1 0 0 0 1 0 0 1 0 0 0 0 1 0 0 0 1 1 0 1 1 0 1
+ 1 0 0 1 0 1 0 1 1 1 1 1 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0]
 </pre>
 </div>
 </div>
@@ -15031,7 +15027,7 @@ Predictions
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[80]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># BDT</span>
@@ -15050,7 +15046,7 @@ Predictions
 <span class="n">fitted_model</span> <span class="o">=</span> <span class="n">ada</span><span class="p">(</span><span class="n">best</span><span class="p">)</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">walking_eval</span><span class="p">(</span><span class="n">l_test</span><span class="p">,</span> <span class="n">fitted_model</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The best BDT is with an average specificity of </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">r</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The best BDT is with an average sensitivity of </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">r</span><span class="p">)))</span>
 </pre></div>
 
      </div>
@@ -15070,8 +15066,8 @@ Predictions
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>The best BDT is with a learning rate of 1.0
-The best BDT is with an average specificity of 0.8736501855279656
+<pre>The best BDT is with a learning rate of 0.1
+The best BDT is with an average sensitivity of 0.4294089214118263
 </pre>
 </div>
 </div>
@@ -15083,7 +15079,7 @@ The best BDT is with an average specificity of 0.8736501855279656
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[81]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Final BDT model test on separate test-set</span>
@@ -15119,32 +15115,77 @@ The best BDT is with an average specificity of 0.8736501855279656
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Accuracy score
-0.8
+0.6761904761904762
 Confusion matrix
-[[182  14]
- [ 32   2]]
+[[70 18]
+ [16  1]]
 Targets
-190     0
-191     0
-192     0
-193     0
-194     0
+215     0
+216     0
+217     0
+218     0
+219     0
        ..
 2012    0
 2013    0
 2014    0
 2015    0
 2016    0
-Name: Entero_level, Length: 230, dtype: int64
+Name: Entero_level, Length: 105, dtype: int64
 Predictions
-[0 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0
- 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0
- 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0
- 0 1 0 0 0 0 0 1 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
- 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0
- 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
- 0 0 0 0 0 0 0 0]
+[0 1 0 1 1 0 1 1 0 0 1 0 1 1 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 1 1 1
+ 1 1 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
 </pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># ANN</span>
+<span class="c1"># Skip the training part as the data set is not large enough to tune the hyperparameters properly for ANN</span>
+
+<span class="c1"># For the completeness of the experiment design, evaluate ANN on a setting off the top of my head</span>
+<span class="n">ann</span> <span class="o">=</span> <span class="n">MLPClassifier</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="s2">&quot;sgd&quot;</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="s2">&quot;adaptive&quot;</span><span class="p">,</span> <span class="n">hidden_layer_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span> 
+<span class="n">r</span> <span class="o">=</span> <span class="n">walking_eval</span><span class="p">(</span><span class="n">ann</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The average sensitivity for the ANNs is </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">r</span><span class="p">)))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">TypeError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-13-d3e78a2dfa86&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">      4</span> <span class="ansi-red-intense-fg ansi-bold"># For the completeness of the experiment design, evaluate ANN on a setting off the top of my head</span>
+<span class="ansi-green-fg">      5</span> ann <span class="ansi-yellow-intense-fg ansi-bold">=</span> MLPClassifier<span class="ansi-yellow-intense-fg ansi-bold">(</span>solver<span class="ansi-yellow-intense-fg ansi-bold">=</span><span class="ansi-blue-intense-fg ansi-bold">&#34;sgd&#34;</span><span class="ansi-yellow-intense-fg ansi-bold">,</span> learning_rate<span class="ansi-yellow-intense-fg ansi-bold">=</span><span class="ansi-blue-intense-fg ansi-bold">&#34;adaptive&#34;</span><span class="ansi-yellow-intense-fg ansi-bold">,</span> hidden_layer_sizes<span class="ansi-yellow-intense-fg ansi-bold">=</span><span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-cyan-intense-fg ansi-bold">4</span><span class="ansi-yellow-intense-fg ansi-bold">,</span> <span class="ansi-cyan-intense-fg ansi-bold">2</span><span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">,</span> max_iter<span class="ansi-yellow-intense-fg ansi-bold">=</span><span class="ansi-cyan-intense-fg ansi-bold">1000</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 6</span><span class="ansi-yellow-intense-fg ansi-bold"> </span>r <span class="ansi-yellow-intense-fg ansi-bold">=</span> walking_eval<span class="ansi-yellow-intense-fg ansi-bold">(</span>ann<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">      7</span> print<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-blue-intense-fg ansi-bold">&#34;The average sensitivity for the ANNs is %s&#34;</span> <span class="ansi-yellow-intense-fg ansi-bold">%</span><span class="ansi-yellow-intense-fg ansi-bold">(</span>np<span class="ansi-yellow-intense-fg ansi-bold">.</span>mean<span class="ansi-yellow-intense-fg ansi-bold">(</span>r<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
+
+<span class="ansi-red-intense-fg ansi-bold">TypeError</span>: walking_eval() missing 1 required positional argument: &#39;fitted_model&#39;</pre>
 </div>
 </div>
 
