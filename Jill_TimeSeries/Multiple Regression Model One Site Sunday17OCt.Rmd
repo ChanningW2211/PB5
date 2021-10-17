@@ -1,0 +1,284 @@
+---
+title: "One site only"
+author: "Jill Bolland"
+date: "14/10/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Code below reads all the data and gets it into a dataframe with Site name as a column
+
+```{r}
+library(readxl)
+library(data.table)
+
+filename = "C:/Users/j/Documents/Uni/ComSci 760/Weather Project/Data/Data for Giovanni from Martin.xlsx"
+sheetnames = excel_sheets(path = filename)
+
+# open the data from the sheet specified
+
+# create function
+read_excel_sheet <- function(sheet_name, path) {
+  x <- read_excel(path = path, sheet = sheet_name)
+}
+
+beachData <- lapply(sheetnames, read_excel_sheet, filename)
+names(beachData) <- sheetnames
+
+# need to get into dataframe so code for graphs and subsetting works
+allBeachesData <- as.data.frame(rbindlist(beachData))
+
+# Get a vector of column names
+# dim(x)[1] gives the number of data points in x  -dim outpust (rows col)
+# apply that fuction to the lists in beacData to give a vector of numbers of rows for each site
+beachrows = sapply(beachData, function(x) dim(x)[1])
+# code replicates each sheetname as many times as in the beachrows vector
+beachSiteCol = rep(sheetnames, beachrows)
+
+# add the beach sites column to the dataframe
+allBeachesData$site = beachSiteCol
+
+#  can do same as above for site characteristics and wind direction
+
+
+```
+
+
+
+Get just one site data into a dataframe
+
+Use the sheetnames[i]  where i is 1 to 5 "Clarks"      "Narrow Neck" "Judges Bay"  "Weymouth"    "Milford"   
+
+```{r}
+site = sheetnames[5]
+
+siteData = allBeachesData[allBeachesData$site == site,]
+head(siteData)
+```
+
+```{r}
+# get a boxplot of all the variables   - excluding wind direction
+# individual box plots
+
+
+# set up plot area 3 by 3
+par(mfrow=c(3, 3))
+for (i in 2:8) {
+  boxplot(siteData[,i], main= paste0(site," ",names(siteData)[i]))  
+}
+
+
+```
+
+```{r}
+
+# line plots
+par(mfrow=c(3, 3))
+for (i in 2:8) {
+  plot(siteData[,i], type = 'l', main= paste0(site," ",names(siteData)[i]))  
+}
+
+```
+
+```{r}
+
+# Density plot
+par(mfrow=c(3, 3))
+
+for (i in 2:8) {
+    d =density(siteData[,i], na.rm = TRUE)
+    plot(d, type="n", main= paste0(site," ",names(siteData)[i]))
+    polygon(d, col="red", border="gray")
+}
+```
+
+
+```{r}
+# Histograms 
+
+par(mfrow=c(3, 3))
+
+for (i in 2:8) {
+    hist(siteData[,i], main= paste0(site," ",names(siteData)[i]), col = 'blue')
+}
+
+# put back to 1 by 1 charts
+par(mfrow=c(1, 1))
+```
+```{r}
+# Wind direction graphs
+#require(devtools)
+#install_github('davidcarslaw/openair')
+library(openair)
+
+par(mfrow=c(1, 2))
+siteWindData = siteData[c(1,7,8)]
+colnames(siteWindData) = c('date','wd','ws')
+# basic wind frequency plot
+polarFreq(siteWindData)
+windRose(siteWindData)
+
+```
+```{r}
+library(s20x)
+# scatter plot of Entero & rain
+pairs20x(siteData[2:6])
+
+# scatter plot of Entero & Wind & solar
+pairs20x(siteData[c(2,7:8)])
+
+```
+######   Add a class column to the data
+```{r}
+siteData$class = ifelse(siteData$Entero < 280,0,1)
+
+```
+
+ 
+```{r}
+# get the last 10% of data and keep as the test data
+# we need to make sure the data is sorted in time and then calculate the number of observations and split the last 10 %
+
+siteData = siteData[order(siteData$DATE), ]
+
+# Drop the Entero level so we just have the class data  - also drop the site name column
+#  Drop the date column for now - will add back in as a variable later
+# Also Drop the RainWA column
+
+siteDataClass = siteData[,-c(1,2,6,10)]
+# get the number of observations/rows and multiply that by the proportion for train/test to split the data
+
+# set the test proportion to 10%  
+testProp = 0.10
+# need to round so we get whole number  0 dp
+trainDataLength = round(nrow(siteData)*(1-testProp),0)
+
+train = siteDataClass[1:trainDataLength,]
+test =  siteDataClass[(trainDataLength+1):nrow(siteData),]
+
+```
+
+###### Use the OTSC library to generate new positive samples
+Note I have modified the functions from this package so they work with our data
+
+
+```{r}
+library(OSTSC)
+library(pdist)
+library(MASS)
+library(fields)
+
+#  Separate class variable from predictor variables ****
+
+train.label = train$class
+train.sample = as.matrix(train[,-7])
+test.label = test$class
+test.sample =  as.matrix(test[,-7])
+
+dim(train.sample)
+
+table(train.label)
+
+# generate the new training samples
+
+OversampledTrain = JillOSTSC(train.sample, train.label, parallel = FALSE, per=0.50)
+
+(table(OversampledTrain[["label"]]))
+
+# get the data into a dataframe for passing to the model
+
+osTrain = as.data.frame(OversampledTrain, optional=FALSE)
+names(osTrain) = names(train)
+
+# Write the oversampled data to csv file
+
+filenametrain = paste0("C:/Users/j/Documents/Uni/ComSci 760/Weather Project/Data/" ,
+                          site, "_oversampledTrainingData.csv")
+
+write.csv(osTrain,filenametrain, row.names = FALSE)
+
+```
+
+Have a look at the oversampled data
+
+```{r}
+# Histograms 
+
+par(mfrow=c(3, 3))
+
+for (i in 1:7) {
+    hist(osTrain[,i], main= paste0(site," ",names(osTrain)[i]), col = 'blue')
+}
+
+# put back to 1 by 1 charts
+par(mfrow=c(1, 1))
+```
+
+```{r}
+
+# Density plot
+par(mfrow=c(3, 3))
+
+for (i in 1:7) {
+    d =density(osTrain[,i], na.rm = TRUE)
+    plot(d, type="n", main= paste0(site," ",names(osTrain)[i]))
+    polygon(d, col="red", border="gray")
+}
+```
+
+```{r}
+
+######  build a multiple logistic regression model
+
+# fig a glm to resp2
+# fit the model
+fit_multLR = glm(class ~ ., data=osTrain, family=binomial)
+# get the predicted values
+yhat_multLR= as.numeric(predict(fit_multLR, newdata=test, type = 'response')>0.5)
+head(yhat_multLR)
+# show model summary
+summary(fit_multLR)
+# show the confusion table
+(confusionMatrix = table(test$class, yhat_multLR))
+
+modelAccuracy = sum(diag(confusionMatrix))/sum(confusionMatrix)
+# True positive rate  
+modelSensitivity = confusionMatrix[2,2]/rowSums(confusionMatrix)[2]
+# True negative rate  
+modelSepicificy = confusionMatrix[1,1]/rowSums(confusionMatrix)[1]
+
+cat("model accuracy = " ,modelAccuracy*100, "% ")
+cat("model Sensitivity  = " ,modelSensitivity*100, "% ")
+cat("model Sepicificy = " ,modelSepicificy*100, "% ") 
+```
+```{r}
+
+######  build a multiple logistic regression model
+
+# fig a glm to resp2
+# fit the model
+fit_multLR = glm(class ~ ., data=train, family=binomial)
+# get the predicted values
+yhat_multLR= as.numeric(predict(fit_multLR, newdata=test, type = 'response')>0.5)
+head(yhat_multLR)
+# show model summary
+summary(fit_multLR)
+# show the confusion table
+(confusionMatrix = table(test$class, yhat_multLR))
+
+(modelAccuracy = sum(diag(confusionMatrix))/sum(confusionMatrix))
+# True positive rate  
+(modelSensitivity = confusionMatrix[2,2]/rowSums(confusionMatrix)[2])
+# True negative rate  
+(modelSepicificy = confusionMatrix[1,1]/rowSums(confusionMatrix)[1])
+
+cat("model accuracy = " ,modelAccuracy*100, "% ")
+cat("model Sensitivity  = " ,modelSensitivity*100, "% ")
+cat("model Sepicificy = " ,modelSepicificy*100, "% ") 
+
+```
+
+
