@@ -1,0 +1,34 @@
+The original data is in Excel file named "full.xlsx". There are five sheets in full.xlsx with each sheet has the data for each beach named "Clarks", "Narrow Neck", "Judges Bay", "Weymouth" and "Milford".
+
+Each data has 9 columns representing Date, Entero count, Rain 24hrs, Rain 48hrs, Rain 72hrs, RainWA, Wind direction, Wind speed, Solar hours.
+
+The Python codes import the data from each sheet separately. And rename the columns if needed to make the column names consistent. 
+
+In the meantime, add columns "BeachName", "BeachType", "BeachDirection". 
+BeachType: 0 - open coast beach (Milford, Narrow Neck), 1 - sheltered bay and harbour (Clarks, Judges Bay, Weymouth); 
+BeachDirection: according to cardinal direction, Clarks-NNW-15, Narrow Neck-NNE-1, Judges Bay-NNE-1, Weymouth-SW-10, Milford-NE-2  
+
+Then combine all the beach data into "full_dataset", which has 2,019 counts. According to the summary by .describe(), there are two missing data in "Entero".
+
+So after removing the missing data, the full_dataset has 2,017 records.
+
+Then add column "Wspeed_level" (Zhang et al.) by the grouping conditions for column "Wspeed";
+add column "Wdirection_level" (cardinal direction) by the grouping conditions for column "Wdirection";
+ 
+Then add column "on_offshore" based on difference between 'BeachDirection' and 'Wdirection_level': 0 - off shore, 1 - on shore, 2 - cross shore.
+
+The final data_frame has 2,017 records with 16 columns. It was exported to "recategorised_data.csv" with no index.
+
+Then the data_frame was sorted by "DATE" and split to 90% train set and 10% test set as agreed. Train set and test set have been exported to "PB5_trainset.csv" and "PB5_testset.csv".
+
+Double checked by read back. 
+
+ 
+
+
+
+
+
+
+
+
