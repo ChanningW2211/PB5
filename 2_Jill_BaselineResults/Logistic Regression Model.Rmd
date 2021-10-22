@@ -1,7 +1,9 @@
 ---
 title: "Logistic Regression Model"
-
-
+author: "Jill Bolland"
+date: "22/10/2021"
+output: html_document
+---
 ##  Data import 
 
  Use the full classified data set
@@ -64,7 +66,7 @@ trainDataLength = round(nrow(EntDataFull)*(1-testProp),0)
 #Drop the date and Entero data and BeachName & rainWA
 # Add Entero Level as Class 
 
-cleanData = EntDataFull[,c(3:5,8,9,11,16)]
+cleanData = EntDataFull[,c(3:5,7:9,11,16)]
 cleanData$Class = EntDataFull$Entero_level
 
 train = cleanData[1:trainDataLength,]
@@ -72,33 +74,7 @@ test =  cleanData[(trainDataLength+1):nrow(cleanData),]
 
 ```
 
-
-####  Use Smote to oversample the data.  Categorical data are just copied rather than sampled
-
-
-```{r}
-library(mlr)
-library(imbalance)
-
-# osRate is the factor for increase in unbalanced data
-osRate = as.integer(floor(table(train$Class)[1]/table(train$Class)[2]))
-
-# first make a task
-classifyTask = makeClassifTask(data = train, target = "Class")
-
-# get the sampled data into a dataframe
-trainOS = mlr::smote(classifyTask, 12)[["env"]][["data"]]
-
-# check the frequency table to check it is balanced
-(table(trainOS$Class))
-
-# Compare the new and old training data
-plotComparison(train, rbind(train, trainOS), attrs = names(train)[1:3])
-plotComparison(train, rbind(train, trainOS), attrs = names(train)[4:6])
-summary(trainOS)
-
-```
-####  GAM predicting with oversampled Data  - trainOS_SMOTE oversampling
+####  GAM predicting with actual Data
 
 ```{r}
 library(gam)
@@ -109,8 +85,8 @@ par(mfrow=c(3,3))
 #fit the gam - use Binomial family as we have binary class data
 # from the scatterplots it looks like we need a smoothing spline of 2 for rainfall but only 1 for others
 
-gamFit = gam(Class ~ s(Rain24, 2) + s(Rain48, 2) + s(Rain72, 2) +s(Wspeed) + s(Solarhours,1) + BeachType + on_offshore, 
-              data=trainOS, family=binomial(), select=TRUE) 
+gamFit = gam(Class ~ s(Rain24, 2) + s(Rain48, 2) + s(Rain72, 2) +s(Wdirection) +s(Wspeed,1) + s(Solarhours,1) + BeachType + on_offshore, 
+              data=train, family=binomial()) 
 
 
 summary(gamFit)
@@ -118,31 +94,6 @@ plot(gamFit,  residuals = TRUE)
 
 # back to one plot only
 par(mfrow=c(1,1)) 
-```
-
-QQ plots
-
-```{r}
-# get residuals and plot
-resids=gamFit$residuals
-hist(resids)
-qqnorm(resids)
-qqline(resids)
-main = 'Linear Model Normal Q-Q plot'
-```
-
-```{r}
-# get y predicted (yhat) and plot residuals against yhat
-ypredicted=gamFit$fitted.values
-plot(ypredicted,resids)
-abline(lm(resids~ypredicted), col="Red")
-```
-
-```{r}
-# plot predicted agains actual
-ypredicted=gamFit$fitted.values
-plot(ypredicted,resids)
-abline(lm(resids~ypredicted), col="Red")
 ```
 
 
@@ -171,9 +122,34 @@ cat("model Sensitivity  = " ,modelSensitivity*100, "% ")
 cat("model Sepicificy = " ,modelSepicificy*100, "% ") 
 ```
 
-####  Fit just the significant variables or ones chosen by Linda feature select
 
-####  Drop Rain72 and Solarhours
+
+####  Use Smote to oversample the data.  Categorical data are just copied rather than sampled
+
+
+```{r}
+library(mlr)
+library(imbalance)
+
+# osRate is the factor for increase in unbalanced data
+osRate = as.integer(floor(table(train$Class)[1]/table(train$Class)[2]))
+
+# first make a task
+classifyTask = makeClassifTask(data = train, target = "Class")
+
+# get the sampled data into a dataframe
+trainOS = mlr::smote(classifyTask, osRate)[["env"]][["data"]]
+
+# check the frequency table to check it is balanced
+(table(trainOS$Class))
+
+# Compare the new and old training data
+plotComparison(train, rbind(train, trainOS), attrs = names(train)[1:3])
+plotComparison(train, rbind(train, trainOS), attrs = names(train)[4:6])
+summary(trainOS)
+
+```
+####  GAM predicting with oversampled Data  - trainOS_SMOTE oversampling
 
 ```{r}
 library(gam)
@@ -184,29 +160,31 @@ par(mfrow=c(3,3))
 #fit the gam - use Binomial family as we have binary class data
 # from the scatterplots it looks like we need a smoothing spline of 2 for rainfall but only 1 for others
 
-gamFit2 = gam(Class ~ s(Rain24, 2) + s(Rain48, 2) +s(Wspeed, 1)  + BeachType + on_offshore, 
-              data=trainOS, family=binomial(), select=TRUE) 
+gamFitOS = gam(Class ~ s(Rain24, 2) + s(Rain48, 2) + s(Rain72, 2) +s(Wdirection) +s(Wspeed) + s(Solarhours,1) + BeachType + on_offshore, 
+              data=trainOS, family=binomial()) 
 
 
-summary(gamFit2)
-plot(gamFit2,  residuals = TRUE)
+summary(gamFitOS)
+plot(gamFitOS,  residuals = TRUE)
 
 # back to one plot only
 par(mfrow=c(1,1)) 
 ```
+
+
 ```{r}
 
 # get prediction
-yhat_gamFit2  = as.numeric(predict(gamFit2, newdata=test)>0.5)
+yhat_gamFitOS  = as.numeric(predict(gamFitOS, newdata=test)>0.5)
 
 # show the confusion table
-table(test$Class, yhat_gamFit2) 
+table(test$Class, yhat_gamFitOS) 
 
 # classification accuracy
-(PE_yhat_gamFit2 = mean(test$Class == yhat_gamFit2))
+(PE_yhat_gamFitOS = mean(test$Class == yhat_gamFitOS))
 
 # show the confusion table
-(confusionMatrix = table(test$Class, yhat_gamFit2))
+(confusionMatrix = table(test$Class, yhat_gamFitOS))
 
 (modelAccuracy = sum(diag(confusionMatrix))/sum(confusionMatrix))
 # True positive rate  
@@ -218,9 +196,6 @@ cat("model accuracy = " ,modelAccuracy*100, "% ")
 cat("model Sensitivity  = " ,modelSensitivity*100, "% ")
 cat("model Sepicificy = " ,modelSepicificy*100, "% ") 
 ```
-
-
-
 
 # rolling prediction
 
